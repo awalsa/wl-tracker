@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>WL Tracker — Radar Free Mint &amp; Whitelist</title>
+    <meta name="description" content="Daftar whitelist & free mint NFT yang lolos filter ketat: gratis/gas-only, chain didukung, tanpa red flag. Discan dari pencarian X dan timeline beranda @sarimaya01 tiap jam." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f4f6f2;
+        --panel: #ffffff;
+        --panel-2: #eef1ea;
+        --ink: #131c16;
+        --ink-soft: #43534a;
+        --line: #d8ded2;
+        --accent: #0c7a43;
+        --accent-ink: #ffffff;
+        --accent-soft: #e2f2e7;
+        --amber: #9a6206;
+        --amber-soft: #faf0da;
+        --red: #b3372c;
+        --red-soft: #f9e7e4;
+        --chip: #e8ede3;
+        --shadow: 0 1px 2px rgba(19, 28, 22, .06), 0 8px 24px rgba(19, 28, 22, .06);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0a0f0c;
+          --panel: #121814;
+          --panel-2: #0e130f;
+          --ink: #e8f0ea;
+          --ink-soft: #9db3a5;
+          --line: #26312a;
+          --accent: #2fe08c;
+          --accent-ink: #06130c;
+          --accent-soft: #123324;
+          --amber: #f0b64f;
+          --amber-soft: #33270e;
+          --red: #ff8a7a;
+          --red-soft: #3a1a15;
+          --chip: #1b251f;
+          --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+      }
+      .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+      .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px 64px; }
+
+      /* ---------- Hero ---------- */
+      .hero { padding: 44px 0 8px; position: relative; }
+      .hero-rings {
+        position: absolute; right: -30px; top: 6px; width: 210px; height: 210px;
+        pointer-events: none; opacity: .5;
+      }
+      .hero h1 {
+        font-family: "Sora", sans-serif; font-weight: 800;
+        font-size: clamp(34px, 6vw, 58px); line-height: 1.04;
+        margin: 0 0 14px; letter-spacing: -0.02em; max-width: 640px;
+      }
+      .hero h1 .grn { color: var(--accent); }
+      .hero p.lede { font-size: clamp(16px, 2.4vw, 19px); color: var(--ink-soft); max-width: 620px; margin: 0 0 22px; }
+      .live-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); margin-right: 7px; vertical-align: 1px; }
+      @media (prefers-reduced-motion: no-preference) {
+        .live-dot { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(47,224,140,.45);} 70% { box-shadow: 0 0 0 8px rgba(47,224,140,0);} 100% { box-shadow: 0 0 0 0 rgba(47,224,140,0);} }
+      }
+      .scanline { font-size: 13.5px; color: var(--ink-soft); margin-bottom: 26px; }
+      .stats {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 8px;
+      }
+      .stat {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+        padding: 14px 16px; box-shadow: var(--shadow);
+      }
+      .stat b { font-family: "Sora", sans-serif; font-size: 26px; display: block; line-height: 1.1; }
+      .stat span { font-size: 12.5px; color: var(--ink-soft); }
+      @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } .hero-rings { display: none; } }
+
+      /* ---------- Deadlines ---------- */
+      h2.sec {
+        font-family: "Sora", sans-serif; font-size: 24px; font-weight: 700;
+        margin: 40px 0 6px; letter-spacing: -0.01em;
+      }
+      .sec-sub { color: var(--ink-soft); margin: 0 0 18px; font-size: 15px; }
+      .deadlines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      @media (max-width: 860px) { .deadlines { grid-template-columns: 1fr; } }
+      .dl {
+        background: var(--panel); border: 1px solid var(--line); border-top: 4px solid var(--red);
+        border-radius: 10px; padding: 16px 18px; box-shadow: var(--shadow);
+      }
+      .dl .when { font-size: 12.5px; color: var(--red); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+      .dl h3 { font-family: "Sora", sans-serif; margin: 6px 0 4px; font-size: 18px; }
+      .dl p { margin: 0 0 10px; color: var(--ink-soft); font-size: 14px; }
+      .dl .count { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 20px; }
+      .dl a { color: var(--accent); font-weight: 600; font-size: 14px; text-decoration: none; display: inline-block; padding: 6px 0; }
+      .dl a:hover { text-decoration: underline; }
+      .dl.is-ended { opacity: .62; border-top-color: var(--ink-soft); }
+      .dl.is-ended h3 { color: var(--ink-soft); }
+      .dl.is-ended .count { color: var(--red); font-size: 15px; }
+      .dl .status-line { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 700; margin-bottom: 8px; }
+      .dl .status-line::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex: none; }
+      .dl.is-ended .status-line::before { background: var(--red); }
+      .dl .status-line { color: var(--accent); }
+      .dl.is-ended .status-line { color: var(--red); }
+
+      /* ---------- Controls ---------- */
+      .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 18px 0 6px; }
+      .controls input[type="search"] {
+        flex: 1 1 220px; min-height: 44px; padding: 10px 14px; font-size: 16px;
+        border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink);
+      }
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+      .chip-btn {
+        min-height: 40px; padding: 8px 16px; border-radius: 999px; cursor: pointer;
+        border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+        font: 600 14px "Inter", sans-serif;
+      }
+      .chip-btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+      .controls-status { margin-top: 2px; }
+      .controls-status .chips-label { font-size: 13px; font-weight: 700; color: var(--ink-soft); margin-right: 2px; }
+      .chip-btn.status-ended[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: #fff; }
+      @media (prefers-color-scheme: dark) { .chip-btn.status-ended[aria-pressed="true"] { color: #1c0a08; } }
+      .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13.5px; color: var(--ink-soft); margin: 12px 0 0; }
+      .legend span { display: inline-flex; align-items: center; gap: 7px; }
+      .legend i { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+      .legend .dot-live { background: var(--accent); }
+      .legend .dot-ended { background: var(--red); }
+      .result-count { font-size: 13.5px; color: var(--ink-soft); margin: 10px 0 14px; }
+
+      /* ---------- Cards ---------- */
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+      @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
+      .card {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+        padding: 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;
+      }
+      .card.caution { border-color: var(--amber); background: linear-gradient(0deg, var(--amber-soft), var(--amber-soft)) , var(--panel); background-blend-mode: normal; }
+      .card.ended { background: var(--panel-2); border-style: dashed; box-shadow: none; }
+      .card.ended h3, .card.ended .handle { color: var(--ink-soft); }
+      .card.ended a.go { background: var(--chip); color: var(--ink-soft); }
+      .tag.live { background: var(--accent-soft); color: var(--accent); }
+      .tag.live::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 5px; vertical-align: 1px; }
+      .tag.ended-tag { background: var(--red-soft); color: var(--red); }
+      .tag.ended-tag::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--red); margin-right: 5px; vertical-align: 1px; }
+      .card-top { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+      .tag {
+        font-family: "JetBrains Mono", monospace; font-size: 11.5px; font-weight: 700;
+        padding: 3px 9px; border-radius: 999px; background: var(--chip); color: var(--ink);
+      }
+      .tag.chain { background: var(--accent-soft); color: var(--accent); }
+      .tag.warn { background: var(--amber-soft); color: var(--amber); }
+      .tag.ref { background: var(--chip); color: var(--ink-soft); }
+      .tag.src { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 2px 8px; }
+      .card h3 { font-family: "Sora", sans-serif; font-size: 18.5px; margin: 2px 0 0; line-height: 1.25; }
+      .card .handle { font-size: 13px; color: var(--ink-soft); }
+      .card p.note { margin: 0; font-size: 14.5px; color: var(--ink-soft); flex: 1; }
+      .card .seen { font-size: 12.5px; color: var(--ink-soft); }
+      .card a.go {
+        align-self: flex-start; margin-top: 4px; min-height: 40px; display: inline-flex; align-items: center;
+        padding: 8px 16px; border-radius: 8px; background: var(--accent); color: var(--accent-ink);
+        font-weight: 600; font-size: 14.5px; text-decoration: none;
+      }
+      .card a.go:hover { filter: brightness(1.07); }
+      .empty { display: none; padding: 28px; text-align: center; color: var(--ink-soft); border: 1px dashed var(--line); border-radius: 12px; }
+
+      /* ---------- Checker ---------- */
+      .checker {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+        padding: 24px; box-shadow: var(--shadow); margin-top: 8px;
+      }
+      .checker form { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 6px; }
+      .checker input {
+        flex: 1 1 300px; min-height: 48px; padding: 12px 14px; font-size: 15px;
+        font-family: "JetBrains Mono", monospace;
+        border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink);
+      }
+      .checker button {
+        min-height: 48px; padding: 12px 22px; border: 0; border-radius: 10px; cursor: pointer;
+        background: var(--accent); color: var(--accent-ink); font: 700 15px "Inter", sans-serif;
+      }
+      .checker .safe { font-size: 13.5px; color: var(--ink-soft); margin: 8px 0 0; }
+      .check-result { margin-top: 16px; display: none; }
+      .check-result.show { display: block; }
+      .check-result .ok {
+        background: var(--accent-soft); border-radius: 10px; padding: 12px 16px; font-size: 14.5px; margin-bottom: 12px;
+      }
+      .check-result .err {
+        background: var(--red-soft); color: var(--red); border-radius: 10px; padding: 12px 16px; font-size: 14.5px;
+      }
+      .check-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      @media (max-width: 620px) { .check-links { grid-template-columns: 1fr; } }
+      .check-links a {
+        display: flex; justify-content: space-between; align-items: center; gap: 8px;
+        border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; min-height: 48px;
+        color: var(--ink); text-decoration: none; font-weight: 600; font-size: 14.5px; background: var(--panel-2);
+      }
+      .check-links a span { color: var(--accent); }
+
+      /* ---------- How it works / sponsor / footer ---------- */
+      .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+      .step { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px; box-shadow: var(--shadow); }
+      .step .num { font-family: "JetBrains Mono", monospace; font-weight: 700; color: var(--accent); font-size: 13px; }
+      .step h3 { font-family: "Sora", sans-serif; margin: 6px 0 6px; font-size: 17px; }
+      .step p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+      .chains { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+      .sponsor {
+        margin-top: 36px; border: 1px dashed var(--line); border-radius: 12px; padding: 20px 22px;
+        display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; justify-content: space-between;
+        background: var(--panel-2);
+      }
+      .sponsor p { margin: 0; font-size: 15px; }
+      .sponsor a { color: var(--accent); font-weight: 700; text-decoration: none; padding: 8px 0; display: inline-block; }
+      footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 18px; color: var(--ink-soft); font-size: 13.5px; }
+      footer p { margin: 0 0 8px; }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+
+      <section class="hero">
+        <svg class="hero-rings" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+          <circle cx="100" cy="100" r="96" stroke="var(--accent)" stroke-width="1.5" opacity=".35"/>
+          <circle cx="100" cy="100" r="66" stroke="var(--accent)" stroke-width="1.5" opacity=".55"/>
+          <circle cx="100" cy="100" r="36" stroke="var(--accent)" stroke-width="1.5" opacity=".8"/>
+          <circle cx="100" cy="100" r="6" fill="var(--accent)"/>
+          <circle cx="152" cy="58" r="5" fill="var(--accent)"/>
+          <circle cx="64" cy="140" r="4" fill="var(--accent)" opacity=".7"/>
+        </svg>
+        <h1>Radar <span class="grn">free mint</span> &amp; whitelist, tanpa noise.</h1>
+        <p class="lede">Bot kami memindai X tiap jam dari dua sumber sekaligus: <strong>pencarian kata kunci</strong> dan <strong>timeline beranda <span class="mono">@sarimaya01</span></strong> — dua-duanya lewat sesi akun itu, karena di berandanya WL baru sering nongol duluan sebelum ketemu pencarian. Yang tampil di daftar utama cuma yang lolos tiga syarat: <strong>gratis / gas-only</strong>, <strong>chain didukung</strong>, dan <strong>tanpa red flag</strong>. Tiga proyek yang lolos scan tapi ternyata kegate di lapangan kami pisahkan di bagian bawah — biar gak ada yang kejebak. Yang <strong>sudah berakhir</strong> juga dipisah ke arsipnya sendiri di paling bawah daftar, jadi daftar utama isinya cuma yang <strong>masih buka</strong>.</p>
+        <p class="scanline"><span class="live-dot" aria-hidden="true"></span>Scan terakhir: <strong>Minggu, 22 Nov 2026 · 16:35 WIB</strong> — 62 postingan ditemukan (24 dari timeline <span class="mono">@sarimaya01</span>), 19 baru discoring, 2 lolos &amp; langsung diumumkan.</p>
+        <div class="stats">
+          <div class="stat"><b>770</b><span>postingan unik discan sejak 19 Nov</span></div>
+          <div class="stat"><b>89</b><span>proyek pernah lolos filter (PASS)</span></div>
+          <div class="stat"><b>27</b><span>proyek masih buka di daftar utama</span></div>
+          <div class="stat"><b>±1 jam</b><span>interval scan hunter</span></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="dl-h">
+        <h2 class="sec" id="dl-h">Deadline terdekat</h2>
+        <p class="sec-sub">Tiga ini yang paling mepet. Hitungan mundur jalan real-time (WIB).</p>
+        <div class="deadlines">
+          <article class="dl">
+            <div class="when">FCFS · Base</div>
+            <h3>Jesse + Tornado Birthday Pack</h3>
+            <span class="status-line">Masih buka</span>
+            <p>Free mint, gas doang. Tag <span class="mono">@celebrationhb</span>, <span class="mono">@jessepollak</span> &amp; <span class="mono">@tornado_ilus</span>, tulis “open my birthday nft gift”, lalu claim di post-nya. Deadline Senin 23 Nov ±07:06 WIB.</p>
+            <div class="count mono" data-deadline="2026-11-23T00:06:07Z">—</div>
+            <a href="https://x.com/altagers/status/2124429205505225011" target="_blank" rel="noopener">Buka post sumber →</a>
+          </article>
+          <article class="dl">
+            <div class="when">Form tutup · Robinhood</div>
+            <h3>Hood Gremlin</h3>
+            <span class="status-line">Masih buka</span>
+            <p>999 supply, free mint. Form pendaftaran tutup Senin 23 Nov 04:00 WIB — spot GTD cuma untuk 50 teratas, naikin peringkat lewat referral.</p>
+            <div class="count mono" data-deadline="2026-11-22T21:00:00Z">—</div>
+            <a href="https://hoodgremlin.xyz/r/HG-9RPK" target="_blank" rel="noopener">Daftar WL →</a>
+          </article>
+          <article class="dl">
+            <div class="when">Mint · Robinhood</div>
+            <h3>Trippi</h3>
+            <span class="status-line">Masih buka</span>
+            <p>1.999 supply, free mint di Robinhood Chain. Mint Selasa 24 Nov 2026 pukul 22:00 WIB — siapin wallet dari sekarang.</p>
+            <div class="count mono" data-deadline="2026-11-24T15:00:00Z">—</div>
+            <a href="https://x.com/i/status/2123599189666144718" target="_blank" rel="noopener">Buka post sumber →</a>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="list-h">
+        <h2 class="sec" id="list-h">Daftar lolos filter — masih buka</h2>
+        <p class="sec-sub">Dikurasi dari hasil scan hunter 19–22 Nov 2026 — pencarian kata kunci plus timeline beranda <span class="mono">@sarimaya01</span>. Kartu bertanda <span class="mono">DARI TIMELINE</span> ketemu di beranda, bukan di hasil pencarian. Daftar utama ini cuma berisi yang <strong>masih buka</strong>; yang sudah berakhir dipindah ke arsip di bawah daftar ini, dan tiap kartu sekarang punya badge statusnya sendiri. Status WL bisa berubah sewaktu-waktu di sisi proyek — selalu cek halaman resminya sebelum gas.</p>
+        <div class="controls">
+          <input type="search" id="q" placeholder="Cari proyek… (mis. MMIX, Kismo)" aria-label="Cari proyek" />
+          <div class="chips" role="group" aria-label="Filter chain">
+            <button class="chip-btn" data-chain="all" aria-pressed="true">Semua</button>
+            <button class="chip-btn" data-chain="Robinhood" aria-pressed="false">Robinhood</button>
+            <button class="chip-btn" data-chain="Ethereum" aria-pressed="false">Ethereum</button>
+            <button class="chip-btn" data-chain="Base" aria-pressed="false">Base</button>
+            <button class="chip-btn" data-chain="BSC" aria-pressed="false">BSC</button>
+            <button class="chip-btn" data-chain="Solana" aria-pressed="false">Solana</button>
+          </div>
+        </div>
+        <div class="controls controls-status">
+          <span class="chips-label" id="status-label">Status:</span>
+          <div class="chips" role="group" aria-labelledby="status-label">
+            <button class="chip-btn status-btn" data-status="all" aria-pressed="true">Semua status</button>
+            <button class="chip-btn status-btn" data-status="active" aria-pressed="false">● Masih buka</button>
+            <button class="chip-btn status-btn status-ended" data-status="ended" aria-pressed="false">● Sudah berakhir</button>
+          </div>
+        </div>
+        <p class="legend" aria-hidden="true">
+          <span><i class="dot-live"></i>Hijau = masih buka, ada di daftar utama</span>
+          <span><i class="dot-ended"></i>Merah = sudah berakhir, ada di arsip bawah</span>
+        </p>
+        <p class="result-count" id="rcount" role="status"></p>
+        <div class="grid" id="grid"></div>
+        <div class="empty" id="empty">Gak ada proyek yang cocok sama filter itu. Coba chain lain atau kosongin pencarian.</div>
+        <div id="gate-wrap">
+          <h2 class="sec">Lolos scan, tapi kegate di lapangan</h2>
+          <p class="sec-sub">Tiga ini lolos filter hunter sebagai free mint, tapi pas dicek manual ternyata ada syarat tambahan. Kami tampilkan terpisah supaya gak kecampur sama yang beneran gratis.</p>
+          <div class="grid" id="grid2"></div>
+        </div>
+        <div id="ended-wrap">
+          <h2 class="sec">Sudah berakhir — arsip</h2>
+          <p class="sec-sub">Yang ini masa daftar / klaim / sale-nya sudah lewat per snapshot 22 Nov 2026. Sengaja dipisah dari daftar utama dan ditandai merah, biar gak ada yang buang waktu ngejar WL yang udah tutup. Link-nya tetap disimpan buat referensi.</p>
+          <div class="grid" id="grid3"></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="check-h">
+        <h2 class="sec" id="check-h">Cek eligibility wallet</h2>
+        <p class="sec-sub">Tempel alamat wallet — formatnya kami validasi di sini, lalu kamu diarahkan ke halaman resmi proyek yang menyediakan checker atau pendaftaran WL buat lihat statusmu.</p>
+        <div class="checker">
+          <form id="check-form">
+            <input id="wallet" type="text" inputmode="text" autocomplete="off" spellcheck="false"
+                   placeholder="0x… (EVM) atau alamat Solana" aria-label="Alamat wallet" />
+            <button type="submit">Cek alamat</button>
+          </form>
+          <p class="safe">Halaman ini <strong>gak pernah</strong> minta connect wallet, tanda tangan, atau seed phrase. Pengecekan eligibility selalu terjadi di situs resmi proyek.</p>
+          <div class="check-result" id="check-result" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="how-h">
+        <h2 class="sec" id="how-h">Cara hunter menyaring</h2>
+        <p class="sec-sub">Dari 770 postingan yang discan, cuma sebagian kecil yang lolos. Ini filternya:</p>
+        <div class="steps">
+          <div class="step">
+            <div class="num">LANGKAH 01</div>
+            <h3>Scan X tiap jam, dua sumber</h3>
+            <p>Hunter memantau postingan free mint &amp; whitelist baru dari 8 kueri pencarian (termasuk kueri khusus Ethereum) <em>dan</em> dari timeline beranda <span class="mono">@sarimaya01</span> — dua-duanya lewat sesi akun itu. Di scan terakhir, 24 dari 62 postingan datang dari timeline, dan 1 dari 2 yang lolos berasal dari sana.</p>
+          </div>
+          <div class="step">
+            <div class="num">LANGKAH 02</div>
+            <h3>Scoring ketat</h3>
+            <p>Tiap kandidat dinilai: harus gratis/gas-only, chain-nya harus salah satu yang didukung, dan gak boleh ada red flag (harga gak jelas, cuma komentar, bukan pengumuman mint).</p>
+          </div>
+          <div class="step">
+            <div class="num">LANGKAH 03</div>
+            <h3>PASS atau SKIP</h3>
+            <p>Yang PASS masuk daftar ini dan diumumkan. Yang SKIP tetap tercatat alasannya — contohnya “chain tidak disebut” atau “tidak sepenuhnya gratis”.</p>
+          </div>
+        </div>
+        <div class="chains" aria-label="Chain yang didukung">
+          <span class="tag chain">Robinhood Chain</span>
+          <span class="tag chain">Ethereum</span>
+          <span class="tag chain">Base</span>
+          <span class="tag chain">BSC</span>
+          <span class="tag chain">Solana</span>
+          <span class="tag chain">Polygon</span>
+          <span class="tag chain">Arbitrum One</span>
+        </div>
+      </section>
+
+      <div class="sponsor">
+        <p><strong>Punya proyek free mint?</strong> Slot featured di halaman ini bisa diisi proyekmu — tampil di atas daftar selama campaign jalan.</p>
+        <a href="https://x.com/sarimaya01" target="_blank" rel="noopener">DM @sarimaya01 di X →</a>
+      </div>
+
+      <footer>
+        <p>Data di halaman ini adalah snapshot hasil scan hunter per <strong>Minggu, 22 Nov 2026, 16:35 WIB</strong> — sumbernya pencarian kata kunci X dan timeline beranda <span class="mono">@sarimaya01</span>. Halaman diperbarui tiap ada rilis data baru.</p>
+        <p>Beberapa link bertanda <span class="mono">ref</span> adalah link referral — gak ngaruh ke harga atau peluangmu, tapi bantu operasional situs ini. Bukan saran finansial; free mint pun tetap butuh gas dan riset sendiri.</p>
+      </footer>
+
+    </main>
+
+    <script>
+      var PROJECTS = [
+        { name: "WOLFY SYNDICATE", handle: "@Wolfy_Syndicate", chain: "Robinhood", type: "FCFS", seen: "22 Nov · 16:31 WIB", src: "timeline",
+          note: "Free mint FCFS di Robinhood Chain, jendela ±24 jam dari post sumber. Ketemu di timeline beranda @sarimaya01 — gak muncul di hasil pencarian kata kunci.",
+          url: "https://x.com/i/status/2124397507732218180", cta: "Post sumber" },
+        { name: "Niblekins", handle: "@Niblekins", chain: "Robinhood", type: "Free mint", seen: "22 Nov · 16:31 WIB",
+          note: "Free mint di Robinhood Chain, tanpa red flag.",
+          url: "https://x.com/Niblekins", cta: "Profil proyek" },
+        { name: "Jesse + Tornado Birthday Pack", handle: "@celebrationhb", chain: "Base", type: "FCFS", seen: "22 Nov · 16:07 WIB",
+          note: "Free mint gas-only. Tag @celebrationhb, @jessepollak & @tornado_ilus, tulis “open my birthday nft gift”, claim di post-nya.",
+          url: "https://x.com/altagers/status/2124429205505225011", cta: "Post sumber" },
+        { name: "MMIX Districts", handle: "@MMIX_io", chain: "Ethereum", type: "Apply WL", seen: "19 Nov · 23:07 WIB",
+          note: "3.000 district isometric, free mint di Ethereum. Daftar WL di situs resminya; district ke-bridge ke mainnet MMIX buat reveal bangunannya.",
+          url: "https://whitelist.mmix.io", cta: "Daftar WL" },
+        { name: "Hoodbit — The Hoodies", handle: "@hoodbitio", chain: "Robinhood", type: "Apply WL", seen: "21 Nov · 23:07 WIB",
+          note: "Supply 777, free gas-only. Whitelist dibuka lewat situs resminya.",
+          url: "https://hoodbit.io/whitelist", cta: "Daftar WL" },
+        { name: "AI Slop", handle: "@AI_SlopRH", chain: "Robinhood", type: "Free mint", seen: "22 Nov · 01:07 WIB",
+          note: "3.333 pixel-art pigs, free mint (gas only) di Robinhood Chain, royalty 10%.",
+          url: "https://x.com/AI_SlopRH", cta: "Profil proyek" },
+        { name: "FREAKAPES", handle: "", chain: "Robinhood", type: "Apply WL", seen: "22 Nov · 13:07 WIB",
+          note: "Whitelist lagi dibuka di halaman WL resminya.",
+          url: "https://wl.freakapes.com", cta: "Daftar WL" },
+        { name: "Kismo Genesis", handle: "", chain: "Ethereum", type: "Checker", seen: "20 Nov · 03:07 WIB",
+          note: "Free mint di Ethereum. Cek dulu eligibility wallet kamu di checker resminya sebelum mint.",
+          url: "https://kismonft.com/genesis/checker", cta: "Buka checker" },
+        { name: "Trippi", handle: "@trippiart", chain: "Robinhood", type: "Mint terjadwal", seen: "20 Nov · 09:07 WIB",
+          note: "1.999 supply. Mint Selasa 24 Nov 2026, 22:00 WIB.",
+          url: "https://x.com/i/status/2123599189666144718", cta: "Post sumber" },
+        { name: "Hood Gremlin", handle: "@hoodgremlinrh", chain: "Robinhood", type: "Apply WL", seen: "20 Nov · 18:07 WIB",
+          note: "999 supply. Form tutup Senin 23 Nov 04:00 WIB; GTD cuma 50 teratas via referral.", ref: true,
+          url: "https://hoodgremlin.xyz/r/HG-9RPK", cta: "Daftar WL" },
+        { name: "Code Kitty", handle: "", chain: "Robinhood", type: "WL terbuka", seen: "20 Nov · 10:07 WIB",
+          note: "Free mint di Robinhood Chain, whitelist terbuka tanpa red flag.",
+          url: "https://codekitty.xyz", cta: "Situs proyek" },
+        { name: "The Syndicate", handle: "", chain: "Robinhood", type: "Apply", seen: "20 Nov · 07:08 WIB",
+          note: "Free mint, allowlist terbuka — apply langsung di situs resminya.",
+          url: "https://apply.syndicaterhc.org", cta: "Apply" },
+        { name: "ShardBlade", handle: "", chain: "BSC", type: "Free mint", seen: "22 Nov · 13:07 WIB",
+          note: "NFT pertama gratis di BSC, tanpa red flag.",
+          url: "https://shardblade.online", cta: "Situs proyek" },
+        { name: "Fomofuzz", handle: "", chain: "Ethereum", type: "Free mint", seen: "21 Nov · 18:21 WIB",
+          note: "Gratis gas-only di Ethereum.",
+          url: "https://fomofuzz.lol", cta: "Situs proyek" },
+        { name: "Magic Rampage", handle: "", chain: "Robinhood", type: "Free mint", seen: "21 Nov · 03:07 WIB",
+          note: "Free mint di Robinhood Chain, tanpa red flag.",
+          url: "https://magicrampage.com", cta: "Situs proyek" },
+        { name: "Bored Grinch Yacht Club", handle: "", chain: "Robinhood", type: "Apply GTD", seen: "20 Nov · 01:07 WIB",
+          note: "Free mint via aplikasi GTD di situs resminya.",
+          url: "https://boredgrinchyc.xyz", cta: "Situs proyek" },
+        { name: "HyperHaul Captains", handle: "", chain: "Robinhood", type: "FCFS live", seen: "22 Nov · 00:07 WIB",
+          note: "Free mint FCFS sempat terdeteksi live — cek koleksinya di OpenSea buat status terakhir.",
+          url: "https://opensea.io/collection/hyperhaulcaptains", cta: "OpenSea" },
+        { name: "No Mercy Society", handle: "@nomercyio", chain: "Robinhood", type: "Mint live", seen: "21 Nov · 19:07 WIB",
+          note: "Free mint terdeteksi live di Robinhood Chain, 1 NFT per wallet.",
+          url: "https://x.com/nomercyio/status/2124110208708600306", cta: "Post sumber" },
+        { name: "Solana Mutant Bear (SMB)", handle: "", chain: "Solana", type: "FCFS", seen: "22 Nov · 03:08 WIB",
+          note: "Free mint FCFS di Solana, tanpa red flag.",
+          url: "https://x.com/i/status/2124229948588372127", cta: "Post sumber" },
+        { name: "Law of the Abyss", handle: "", chain: "Solana", type: "Giveaway WL", seen: "20 Nov · 15:08 WIB",
+          note: "Giveaway WL untuk free mint di Solana.",
+          url: "https://x.com/i/status/2123680445296455826", cta: "Post sumber" },
+        { name: "AUGENT", handle: "", chain: "BSC", type: "Claim", seen: "19 Nov · 10:07 WIB", ended: true,
+          note: "Klaim gratis/gas-only buat holder Binance Agent ID — tapi sale-nya sudah final 21 Nov. Ditampilkan sebagai arsip; anggap berakhir kecuali proyeknya buka lagi.",
+          url: "https://x.com/i/status/2123243986311954892", cta: "Post sumber" },
+        { name: "Kitzy", handle: "", chain: "Robinhood", type: "GTD + FCFS", seen: "19 Nov · 11:07 WIB",
+          note: "Free mint — 5 spot GTD + 15 spot FCFS.",
+          url: "https://x.com/i/status/2123263506984100307", cta: "Post sumber" },
+        { name: "Mopes", handle: "", chain: "Robinhood", type: "Free mint", seen: "19 Nov · 18:07 WIB",
+          note: "Free mint di Robinhood, tanpa red flag.",
+          url: "https://x.com/i/status/2123367851688083816", cta: "Post sumber" },
+        { name: "Enter The Anime", handle: "@entertheanime", chain: "Robinhood", type: "Free mint", seen: "19 Nov · 07:04 WIB",
+          note: "Supply 5.000, free mint di Robinhood Chain.",
+          url: "https://x.com/entertheanime", cta: "Profil proyek" },
+        { name: "INMATES", handle: "@INMATES_RH", chain: "Robinhood", type: "WL via post", seen: "19 Nov · 11:07 WIB",
+          note: "Whitelist via drop wallet di post resminya.",
+          url: "https://x.com/INMATES_RH/status/2123082677507219867", cta: "Post sumber" },
+        { name: "Rebelian", handle: "", chain: "Robinhood", type: "Apply WL", seen: "19 Nov · 13:08 WIB",
+          note: "Supply 666, free mint — entry WL lagi dibuka.",
+          url: "https://x.com/i/status/2123295774805258569", cta: "Post sumber" },
+        { name: "Skeleton Club", handle: "", chain: "Ethereum", type: "Free mint", seen: "19 Nov · 11:07 WIB",
+          note: "Free mint / whitelist di Ethereum, tanpa red flag.",
+          url: "https://x.com/i/status/2123255562389401642", cta: "Post sumber" },
+        { name: "Frenzz", handle: "", chain: "Robinhood", type: "Spin WL", seen: "19 Nov · 12:07 WIB",
+          note: "WL lewat spin di frenzz.xyz. Spin butuh connect wallet — lakukan dari HP kamu sendiri, jangan dari link orang lain.",
+          url: "https://x.com/i/status/2123273655350145179", cta: "Post sumber" },
+        { name: "Beepz", handle: "@beepzfun", chain: "Robinhood", type: "Lolos scan", seen: "19 Nov · 18:07 WIB", caution: true, section: "gate",
+          note: "Lolos scan sebagai free mint, TAPI mint-nya kegate: harus burn 5.000 Beepz inscriptions atau hold 500.000 $BEEPZ. Gak punya keduanya = gak bisa mint.",
+          url: "https://x.com/i/status/2123366556180836461", cta: "Post sumber" },
+        { name: "Droolies", handle: "", chain: "Robinhood", type: "Lolos scan", seen: "19 Nov · 18:07 WIB", caution: true, section: "gate",
+          note: "Lolos scan sebagai free mint, TAPI gratisnya cuma buat holder StonkBrokers/Quirkies. Di luar itu mint-nya lelang berbayar mulai 0,01344 ETH.",
+          url: "https://x.com/i/status/2123364602830258330", cta: "Post sumber" },
+        { name: "Unicorn Grand Prix", handle: "@UnicornGPrix", chain: "Robinhood", type: "Lolos scan", seen: "19 Nov · 07:06 WIB", caution: true, section: "gate",
+          note: "Lolos scan sebagai free mint, TAPI checker on-chain-nya nolak wallet dengan saldo ETH di Robinhood di bawah $5 — kode akses gak terbit di bawah itu.",
+          url: "https://x.com/UnicornGPrix", cta: "Profil proyek" }
+      ];
+
+      var grid = document.getElementById('grid');
+      var rcount = document.getElementById('rcount');
+      var empty = document.getElementById('empty');
+      var activeChain = 'all';
+      var activeStatus = 'all';
+      var query = '';
+
+      function esc(s) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function cardHTML(p) {
+        return '<article class="card' + (p.caution ? ' caution' : '') + (p.ended ? ' ended' : '') + '">' +
+          '<div class="card-top">' +
+            (p.ended ? '<span class="tag ended-tag">SUDAH BERAKHIR</span>' : '<span class="tag live">MASIH BUKA</span>') +
+            '<span class="tag chain">' + esc(p.chain) + '</span>' +
+            '<span class="tag">' + esc(p.type) + '</span>' +
+            (p.src === 'timeline' ? '<span class="tag src">DARI TIMELINE</span>' : '') +
+            (p.caution ? '<span class="tag warn">ADA CATATAN</span>' : '') +
+            (p.ref ? '<span class="tag ref">ref</span>' : '') +
+          '</div>' +
+          '<h3>' + esc(p.name) + '</h3>' +
+          (p.handle ? '<div class="handle mono">' + esc(p.handle) + '</div>' : '') +
+          '<p class="note">' + esc(p.note) + '</p>' +
+          '<div class="seen">Terdeteksi hunter: ' + esc(p.seen) + '</div>' +
+          '<a class="go" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + (p.ended ? 'Arsip: ' : '') + esc(p.cta) + ' →</a>' +
+        '</article>';
+      }
+
+      function render() {
+        var match = function (p) {
+          var okChain = activeChain === 'all' || p.chain === activeChain;
+          var okStatus = activeStatus === 'all' || (activeStatus === 'ended' ? !!p.ended : !p.ended);
+          var okQ = !query || (p.name + ' ' + p.handle + ' ' + p.note).toLowerCase().indexOf(query) !== -1;
+          return okChain && okStatus && okQ;
+        };
+        var main = PROJECTS.filter(function (p) { return p.section !== 'gate' && !p.ended && match(p); });
+        var gate = PROJECTS.filter(function (p) { return p.section === 'gate' && match(p); });
+        var ended = PROJECTS.filter(function (p) { return p.section !== 'gate' && p.ended && match(p); });
+        grid.innerHTML = main.map(cardHTML).join('');
+        document.getElementById('grid2').innerHTML = gate.map(cardHTML).join('');
+        document.getElementById('grid3').innerHTML = ended.map(cardHTML).join('');
+        document.getElementById('gate-wrap').style.display = gate.length ? 'block' : 'none';
+        document.getElementById('ended-wrap').style.display = ended.length ? 'block' : 'none';
+        var parts = [];
+        if (activeStatus !== 'ended') parts.push(main.length + ' masih buka di daftar utama');
+        if (gate.length && activeStatus !== 'ended') parts.push(gate.length + ' di bagian catatan (kegate)');
+        if (ended.length) parts.push(ended.length + ' sudah berakhir di arsip');
+        rcount.textContent = parts.length ? 'Menampilkan ' + parts.join(' · ') + '.' : 'Gak ada proyek yang cocok sama filter itu.';
+        empty.style.display = (main.length || ended.length) ? 'none' : 'block';
+      }
+
+      document.querySelectorAll('.chip-btn[data-chain]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.chip-btn[data-chain]').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+          btn.setAttribute('aria-pressed', 'true');
+          activeChain = btn.getAttribute('data-chain');
+          render();
+        });
+      });
+      document.querySelectorAll('.chip-btn[data-status]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.chip-btn[data-status]').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+          btn.setAttribute('aria-pressed', 'true');
+          activeStatus = btn.getAttribute('data-status');
+          render();
+        });
+      });
+      document.getElementById('q').addEventListener('input', function (e) {
+        query = e.target.value.trim().toLowerCase();
+        render();
+      });
+      render();
+
+      /* ---------- Countdowns ---------- */
+      function tick() {
+        var now = Date.now();
+        document.querySelectorAll('[data-deadline]').forEach(function (el) {
+          var diff = new Date(el.getAttribute('data-deadline')).getTime() - now;
+          if (diff <= 0) {
+            el.textContent = 'SUDAH BERAKHIR — deadline sudah lewat, cek status terakhir di proyeknya';
+            var card = el.closest('.dl');
+            if (card) {
+              card.classList.add('is-ended');
+              var st = card.querySelector('.status-line');
+              if (st) st.textContent = 'Sudah berakhir';
+            }
+            return;
+          }
+          var s = Math.floor(diff / 1000);
+          var d = Math.floor(s / 86400); s -= d * 86400;
+          var h = Math.floor(s / 3600); s -= h * 3600;
+          var m = Math.floor(s / 60); s -= m * 60;
+          el.textContent = (d > 0 ? d + ' hari ' : '') + h + ' jam ' + m + ' mnt ' + s + ' dtk lagi';
+        });
+      }
+      tick();
+      setInterval(tick, 1000);
+
+      /* ---------- Eligibility checker ---------- */
+      var CHECKERS = [
+        { name: 'Kismo Genesis — checker eligibility', url: 'https://kismonft.com/genesis/checker' },
+        { name: 'MMIX Districts — halaman WL resmi', url: 'https://whitelist.mmix.io' },
+        { name: 'Hoodbit — halaman WL resmi', url: 'https://hoodbit.io/whitelist' },
+        { name: 'FREAKAPES — halaman WL resmi', url: 'https://wl.freakapes.com' }
+      ];
+      document.getElementById('check-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var v = document.getElementById('wallet').value.trim();
+        var box = document.getElementById('check-result');
+        var kind = null;
+        if (/^0x[0-9a-fA-F]{40}$/.test(v)) kind = 'EVM';
+        else if (/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(v)) kind = 'Solana';
+        if (!kind) {
+          box.innerHTML = '<div class="err">Format alamat gak dikenali. Alamat EVM diawali <span class="mono">0x</span> dan panjangnya 42 karakter; alamat Solana 32–44 karakter base58.</div>';
+          box.classList.add('show');
+          return;
+        }
+        var short = v.length > 14 ? v.slice(0, 8) + '…' + v.slice(-6) : v;
+        var links = CHECKERS.map(function (c) {
+          return '<a href="' + c.url + '" target="_blank" rel="noopener">' + esc(c.name) + ' <span>→</span></a>';
+        }).join('');
+        box.innerHTML =
+          '<div class="ok">Alamat valid (' + kind + '): <span class="mono">' + esc(short) + '</span>. ' +
+          'Sejauh ini Kismo Genesis yang menyediakan checker eligibility khusus; proyek lain menyediakan halaman WL resmi. Buka dari daftar di bawah, lalu tempel alamat lengkapmu di sana buat lihat statusmu.</div>' +
+          '<div class="check-links">' + links + '</div>';
+        box.classList.add('show');
+      });
+    </script>
+  </body>
+</html>
