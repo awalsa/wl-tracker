@@ -176,6 +176,8 @@
         font-weight: 600; font-size: 14.5px; text-decoration: none;
       }
       .card a.go:hover { filter: brightness(1.07); }
+      .card a.post-link { align-self: flex-start; color: var(--accent); font-weight: 600; font-size: 13.5px; text-decoration: none; padding: 2px 0; }
+      .card a.post-link:hover { text-decoration: underline; }
       .empty { display: none; padding: 28px; text-align: center; color: var(--ink-soft); border: 1px dashed var(--line); border-radius: 12px; }
 
       /* ---------- Checker ---------- */
@@ -244,11 +246,11 @@
         </svg>
         <h1>Radar <span class="grn">free mint</span> &amp; whitelist, tanpa noise.</h1>
         <p class="lede">Bot kami memindai X tiap jam dari dua sumber sekaligus: <strong>pencarian kata kunci</strong> dan <strong>timeline beranda <span class="mono">@sarimaya01</span></strong> — dua-duanya lewat sesi akun itu, karena di berandanya WL baru sering nongol duluan sebelum ketemu pencarian. Yang tampil di daftar utama cuma yang lolos tiga syarat: <strong>gratis / gas-only</strong>, <strong>chain didukung</strong>, dan <strong>tanpa red flag</strong>. Tiga proyek yang lolos scan tapi ternyata kegate di lapangan kami pisahkan di bagian bawah — biar gak ada yang kejebak. Yang <strong>sudah berakhir</strong> juga dipisah ke arsipnya sendiri di paling bawah daftar, jadi daftar utama isinya cuma yang <strong>masih buka</strong>.</p>
-        <p class="scanline"><span class="live-dot" aria-hidden="true"></span>Scan terakhir: <strong>Minggu, 22 Nov 2026 · 16:35 WIB</strong> — 62 postingan ditemukan (24 dari timeline <span class="mono">@sarimaya01</span>), 19 baru discoring, 2 lolos &amp; langsung diumumkan.</p>
+        <p class="scanline"><span class="tag warn" style="margin-right:8px;">SNAPSHOT STATIS — BUKAN DATA LIVE</span><span class="live-dot" aria-hidden="true"></span>Snapshot dari scan hunter: <strong>Minggu, 22 Nov 2026 · 18:07 WIB</strong> — 62 postingan ditemukan, 20 baru, 10 dinilai, 1 lolos &amp; langsung diumumkan.</p>
         <div class="stats">
-          <div class="stat"><b>770</b><span>postingan unik discan sejak 19 Nov</span></div>
-          <div class="stat"><b>89</b><span>proyek pernah lolos filter (PASS)</span></div>
-          <div class="stat"><b>27</b><span>proyek masih buka di daftar utama</span></div>
+          <div class="stat"><b>780</b><span>postingan unik discan sejak 19 Nov</span></div>
+          <div class="stat"><b>90</b><span>proyek pernah lolos filter (PASS)</span></div>
+          <div class="stat"><b>28</b><span>proyek masih buka di daftar utama</span></div>
           <div class="stat"><b>±1 jam</b><span>interval scan hunter</span></div>
         </div>
       </section>
@@ -341,12 +343,12 @@
 
       <section aria-labelledby="how-h">
         <h2 class="sec" id="how-h">Cara hunter menyaring</h2>
-        <p class="sec-sub">Dari 770 postingan yang discan, cuma sebagian kecil yang lolos. Ini filternya:</p>
+        <p class="sec-sub">Dari 780 postingan yang discan, cuma sebagian kecil yang lolos. Ini filternya:</p>
         <div class="steps">
           <div class="step">
             <div class="num">LANGKAH 01</div>
             <h3>Scan X tiap jam, dua sumber</h3>
-            <p>Hunter memantau postingan free mint &amp; whitelist baru dari 8 kueri pencarian (termasuk kueri khusus Ethereum) <em>dan</em> dari timeline beranda <span class="mono">@sarimaya01</span> — dua-duanya lewat sesi akun itu. Di scan terakhir, 24 dari 62 postingan datang dari timeline, dan 1 dari 2 yang lolos berasal dari sana.</p>
+            <p>Hunter memantau postingan free mint &amp; whitelist baru dari 8 kueri pencarian (termasuk kueri khusus Ethereum) <em>dan</em> dari timeline beranda <span class="mono">@sarimaya01</span> — dua-duanya lewat sesi akun itu. Di scan pukul 16:35 WIB, 24 dari 62 postingan datang dari timeline, dan 1 dari 2 yang lolos berasal dari sana.</p>
           </div>
           <div class="step">
             <div class="num">LANGKAH 02</div>
@@ -376,7 +378,7 @@
       </div>
 
       <footer>
-        <p>Data di halaman ini adalah snapshot hasil scan hunter per <strong>Minggu, 22 Nov 2026, 16:35 WIB</strong> — sumbernya pencarian kata kunci X dan timeline beranda <span class="mono">@sarimaya01</span>. Halaman diperbarui tiap ada rilis data baru.</p>
+        <p>Data di halaman ini adalah <strong>snapshot statis</strong> hasil scan hunter per <strong>Minggu, 22 Nov 2026, 18:07 WIB</strong> — bukan data live. Sumbernya pencarian kata kunci X dan timeline beranda <span class="mono">@sarimaya01</span>. Halaman diperbarui tiap ada rilis data baru.</p>
         <p>Beberapa link bertanda <span class="mono">ref</span> adalah link referral — gak ngaruh ke harga atau peluangmu, tapi bantu operasional situs ini. Bukan saran finansial; free mint pun tetap butuh gas dan riset sendiri.</p>
       </footer>
 
@@ -384,6 +386,10 @@
 
     <script>
       var PROJECTS = [
+        { name: "Sealed", handle: "@Sealedarts", chain: "Robinhood", type: "Apply GTD", seen: "22 Nov · 18:07 WIB",
+          note: "Supply 444, freemint (gratis, gas-only) di Robinhood Chain. Apply GTD lewat situs resminya — tidak ada deadline diumumkan.",
+          url: "https://sealedarts.xyz/apply", cta: "Apply GTD",
+          post: "https://x.com/Sealedarts/status/2124441773774692577" },
         { name: "WOLFY SYNDICATE", handle: "@Wolfy_Syndicate", chain: "Robinhood", type: "FCFS", seen: "22 Nov · 16:31 WIB", src: "timeline",
           note: "Free mint FCFS di Robinhood Chain, jendela ±24 jam dari post sumber. Ketemu di timeline beranda @sarimaya01 — gak muncul di hasil pencarian kata kunci.",
           url: "https://x.com/i/status/2124397507732218180", cta: "Post sumber" },
@@ -505,6 +511,7 @@
           '<p class="note">' + esc(p.note) + '</p>' +
           '<div class="seen">Terdeteksi hunter: ' + esc(p.seen) + '</div>' +
           '<a class="go" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + (p.ended ? 'Arsip: ' : '') + esc(p.cta) + ' →</a>' +
+          (p.post ? '<a class="post-link" href="' + esc(p.post) + '" target="_blank" rel="noopener">Post sumber di X →</a>' : '') +
         '</article>';
       }
 
